@@ -23,4 +23,4 @@ go get -u github.com/ngauthier/mig
 mig help
 ```
 
-For more info about the commands, see the [GoDoc Reference](https://godoc.org/github.com/ngauthier/mig)
+For more info about the commands, see the [libmig GoDoc Reference](https://godoc.org/github.com/ngauthier/mig/libmig)
