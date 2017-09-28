@@ -8,7 +8,7 @@ migrations should be managed and how your application is configured. If you have
 
 ## TODO
 
-- [ ] travis
+- [x] travis
 - [ ] godoc
 - [ ] initialize an app
 - [ ] create a migration
