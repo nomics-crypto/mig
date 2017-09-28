@@ -9,14 +9,14 @@ import (
 
 func TestHelp(t *testing.T) {
 	err := Run([]string{"help"})
-	if err != UsageError {
+	if err != ErrUsage {
 		t.Fatal(err)
 	}
 }
 
 func TestNoArgs(t *testing.T) {
 	err := Run([]string{})
-	if err != UsageError {
+	if err != ErrUsage {
 		t.Fatal(err)
 	}
 }

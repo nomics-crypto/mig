@@ -7,25 +7,32 @@ const (
 	dirName = "migrations"
 )
 
-var UsageError = fmt.Errorf(`Usage:
+// ErrUsage is returned if mig is used improperly
+var ErrUsage = fmt.Errorf(`usage:
 	mig <command> [arguments]
 
-Commands:
+commands:
 	init
-	help
-`)
+	help`)
 
+// Run is the entrypoint for the executable. It takes and arguments list
+// and returns an error.
 func Run(args []string) error {
 	if len(args) == 0 {
-		return UsageError
+		return ErrUsage
 	}
 	switch args[0] {
 	case "init":
 		return Init()
 	}
-	return UsageError
+	return ErrUsage
 }
 
+// Init is called via `mig init` and initializes a project for mig.
 func Init() error {
-	return os.Mkdir(dirName, 0755)
+	err := os.Mkdir(dirName, 0755)
+	if err == nil {
+		fmt.Println("mig initialized")
+	}
+	return err
 }

@@ -8,6 +8,6 @@ import (
 func main() {
 	err := Run(os.Args[1:])
 	if err != nil {
-		fmt.Print(err.Error())
+		fmt.Println(err.Error())
 	}
 }
