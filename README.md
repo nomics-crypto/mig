@@ -11,6 +11,7 @@ migrations should be managed and how your application is configured. If you have
 
 - [x] travis
 - [x] godoc
+- [ ] contributor guidelins + coc
 - [ ] initialize an app
 - [ ] create a migration
 - [ ] run migrations up
