@@ -1,19 +1,23 @@
-package main
+package libmig
 
 import "fmt"
 import "os"
 
 const (
-	dirName = "migrations"
-)
+	// DirName is the name of the directory migrations are in
+	DirName = "migrations"
 
-// ErrUsage is returned if mig is used improperly
-var ErrUsage = fmt.Errorf(`usage:
+	// Usage is the command line usage documentation
+	Usage = `usage:
 	mig <command> [arguments]
 
 commands:
 	init
-	help`)
+	help`
+)
+
+// ErrUsage is returned if mig is used improperly
+var ErrUsage = fmt.Errorf(Usage)
 
 // Run is the entrypoint for the executable. It takes and arguments list
 // and returns an error.
@@ -30,7 +34,7 @@ func Run(args []string) error {
 
 // Init is called via `mig init` and initializes a project for mig.
 func Init() error {
-	err := os.Mkdir(dirName, 0755)
+	err := os.Mkdir(DirName, 0755)
 	if err == nil {
 		fmt.Println("mig initialized")
 	}
