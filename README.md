@@ -11,11 +11,11 @@ migrations should be managed and how your application is configured. If you have
 
 - [x] travis
 - [x] godoc
-- [ ] contributor guidelins + coc
+- [ ] contributor guidelines + coc
 - [ ] initialize an app
 - [ ] create a migration
 - [ ] run migrations up
 - [ ] run migrations down
 - [ ] run a single migration up or down
-- [ ] environment (database) via `.env` if available
+- [ ] environment (database) via `.env` if available [Heroku Local style](https://devcenter.heroku.com/articles/heroku-local)
 - [ ] usage documentation
