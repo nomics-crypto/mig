@@ -6,3 +6,21 @@
 `mig` is a minimal application migration tool. It comes with very strong conventions around how
 migrations should be managed and how your application is configured. If you have a
 [12 factor app](https://12factor.net/) on a cloud PAAS then `mig` should work for you.
+
+## Installing
+
+Install `mig` with Go:
+
+```
+go get -u github.com/ngauthier/mig
+```
+
+## Usage
+
+`mig` gives you help:
+
+```
+mig help
+```
+
+For more info about the commands, see the [GoDoc Reference](https://godoc.org/github.com/ngauthier/mig)
