@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 func main() {
-	fmt.Println("hello this is mig")
+	err := Run(os.Args[1:])
+	if err != nil {
+		fmt.Print(err.Error())
+	}
 }
