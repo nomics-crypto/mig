@@ -1,6 +1,7 @@
 package libmig
 
 import (
+	"database/sql"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -22,6 +23,15 @@ func TestNoArgs(t *testing.T) {
 }
 
 func TestInitialize(t *testing.T) {
+	db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, err = db.Exec("DROP TABLE IF EXISTS migrations")
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	dir, err := ioutil.TempDir("", "mig-test")
 	if err != nil {
 		t.Fatal(err)
@@ -58,4 +68,40 @@ func TestInitialize(t *testing.T) {
 	if !info.IsDir() {
 		t.Fatal("migrations should be a folder")
 	}
+
+	var versionCount int
+	err = db.QueryRow("SELECT count(*) FROM migrations").Scan(&versionCount)
+
+	if versionCount != 1 {
+		t.Fatal("expected initial version in database")
+	}
+
+	err = Run([]string{"new", "do-something"})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	err = Run([]string{"up"})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	err = db.QueryRow("SELECT count(*) FROM migrations").Scan(&versionCount)
+
+	if versionCount != 2 {
+		t.Fatal("expected new version in database")
+	}
+
+	err = Run([]string{"down"})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var check bool
+	row := db.QueryRow("SELECT true from information_schema.tables WHERE table_name='migrations'")
+	err = row.Scan(&check)
+	if err != sql.ErrNoRows {
+		t.Fatal("expected no migrations table", err)
+	}
+
 }

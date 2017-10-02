@@ -108,7 +108,7 @@ func Up() error {
 		return err
 	}
 
-	vs, err := versions(db)
+	vs, err := versions(db, false)
 	if err != nil {
 		return err
 	}
@@ -159,7 +159,7 @@ func Down() error {
 		return err
 	}
 
-	vs, err := versions(db)
+	vs, err := versions(db, true)
 	if err != nil {
 		return err
 	}
@@ -221,7 +221,7 @@ func db() (*sql.DB, error) {
 	return sql.Open("postgres", dbURL)
 }
 
-func versions(db *sql.DB) ([]string, error) {
+func versions(db *sql.DB, reverse bool) ([]string, error) {
 	row := db.QueryRow("SELECT true FROM information_schema.tables WHERE table_name=$1", TableName)
 	var check bool
 	if err := row.Scan(&check); err == sql.ErrNoRows {
@@ -233,7 +233,11 @@ func versions(db *sql.DB) ([]string, error) {
 
 	vs := []string{}
 
-	rows, err := db.Query("SELECT version FROM " + TableName + " ORDER BY version ASC")
+	order := "ASC"
+	if reverse {
+		order = "DESC"
+	}
+	rows, err := db.Query("SELECT version FROM " + TableName + " ORDER BY version " + order)
 	if err != nil {
 		return nil, err
 	}
