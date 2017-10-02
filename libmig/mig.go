@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strings"
 	"time"
 
 	// PostgreSQL driver
@@ -218,6 +219,19 @@ func date() string {
 
 func db() (*sql.DB, error) {
 	dbURL := os.Getenv("DATABASE_URL")
+	if dbURL == "" {
+		envBytes, err := ioutil.ReadFile(".env")
+		if err == nil {
+			envLines := strings.Split(string(envBytes), "\n")
+			for _, line := range envLines {
+				tuple := strings.Split(line, "=")
+				if len(tuple) == 2 && tuple[0] == "DATABASE_URL" {
+					dbURL = tuple[1]
+					break
+				}
+			}
+		}
+	}
 	return sql.Open("postgres", dbURL)
 }
 

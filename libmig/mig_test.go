@@ -2,9 +2,7 @@ package libmig
 
 import (
 	"database/sql"
-	"io/ioutil"
 	"os"
-	"path/filepath"
 	"testing"
 )
 
@@ -23,7 +21,7 @@ func TestNoArgs(t *testing.T) {
 }
 
 func TestInitialize(t *testing.T) {
-	db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	db, err := db()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -32,14 +30,12 @@ func TestInitialize(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	dir, err := ioutil.TempDir("", "mig-test")
-	if err != nil {
+	dir := "migrations"
+	if err := os.RemoveAll(dir); err != nil {
 		t.Fatal(err)
 	}
-	os.Chdir(dir)
 
-	migrationsDirectory := filepath.Join(dir, "migrations")
-	f, err := os.Open(migrationsDirectory)
+	f, err := os.Open(dir)
 	if err == nil {
 		t.Fatal("expected error opening migrations path")
 	}
@@ -55,7 +51,7 @@ func TestInitialize(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	f, err = os.Open(migrationsDirectory)
+	f, err = os.Open(dir)
 	if err != nil {
 		t.Fatal("error opening migrations path after init")
 	}

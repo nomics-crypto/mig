@@ -31,3 +31,36 @@ commands:
   down                       # Run all down migrations for migrations that have been run
   help                       # This usage information
 ```
+
+## Development
+
+PostgreSQL must be installed and running.
+
+**You must create a database** for mig to use. (In these examples, I use a database called `mig`)
+
+You must do **one** of these:
+
+1. Set `DATABASE_URL` in the environment to a usable URL. For example: `postgres://me@localhost/mig`
+2. Create `./libmig/.env` and add a line `DATABASE_URL=your db url`
+
+This way, mig works on Heroku and Travis quite easily. Now you should be able to run:
+
+```
+$ go test ./...
+```
+
+You should also be able to try out the CLI:
+
+```
+$ go install
+$ mig init
+mig initialized
+running 20171002164433-create-migrations
+$ psql -c "SELECT version FROM migrations" -d mig
+             version
+----------------------------------
+ 20171002164433-create-migrations
+(1 row)
+```
+
+p.s. I have tested mig on linux and on windows, but not on OS X. If it needs tweaks for OS X let me know.
