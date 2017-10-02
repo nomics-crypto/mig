@@ -7,6 +7,12 @@
 migrations should be managed and how your application is configured. If you have a
 [12 factor app](https://12factor.net/) on a cloud PAAS then `mig` should work for you.
 
+`mig` uses raw SQL migration files so that the evolution of your code never renders an old migration obsolete, and also so that you can write heavily optimized SQL, and finally so that if anything goes wrong you can always execute a migration file directly, like this:
+
+```
+$ psql -a -f do-something.down.sql
+```
+
 ## Installing
 
 Install `mig` with Go:
