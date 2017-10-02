@@ -20,7 +20,14 @@ go get -u github.com/nomics-crypto/mig
 `mig` gives you help:
 
 ```
-mig help
-```
+$ mig
+usage:
+  mig <command> [arguments]
 
-For more info about the commands, see the [libmig GoDoc Reference](https://godoc.org/github.com/nomics-crypto/mig/libmig)
+commands:
+  init                       # Initialize an app with mig
+  new <name-of-migration>    # Create a new migration with the given name
+  up                         # Run all migrations that haven't been run
+  down                       # Run all down migrations for migrations that have been run
+  help                       # This usage information
+```
