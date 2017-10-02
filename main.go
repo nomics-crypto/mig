@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ngauthier/mig/libmig"
+	"github.com/nomics-crypto/mig/libmig"
 )
 
 func main() {

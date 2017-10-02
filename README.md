@@ -1,7 +1,7 @@
 # `mig`: the littlest migrator
 
-[![GoDoc](https://godoc.org/github.com/ngauthier/mig?status.svg)](https://godoc.org/github.com/ngauthier/mig)
-[![Build Status](https://travis-ci.org/ngauthier/mig.svg?branch=master)](https://travis-ci.org/ngauthier/mig)
+[![GoDoc](https://godoc.org/github.com/nomics-crypto/mig?status.svg)](https://godoc.org/github.com/nomics-crypto/mig)
+[![Build Status](https://travis-ci.org/nomics-crypto/mig.svg?branch=master)](https://travis-ci.org/nomics-crypto/mig)
 
 `mig` is a minimal application migration tool. It comes with very strong conventions around how
 migrations should be managed and how your application is configured. If you have a
@@ -12,7 +12,7 @@ migrations should be managed and how your application is configured. If you have
 Install `mig` with Go:
 
 ```
-go get -u github.com/ngauthier/mig
+go get -u github.com/nomics-crypto/mig
 ```
 
 ## Usage
@@ -23,4 +23,4 @@ go get -u github.com/ngauthier/mig
 mig help
 ```
 
-For more info about the commands, see the [libmig GoDoc Reference](https://godoc.org/github.com/ngauthier/mig/libmig)
+For more info about the commands, see the [libmig GoDoc Reference](https://godoc.org/github.com/nomics-crypto/mig/libmig)
