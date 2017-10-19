@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"os"
 
 	"github.com/nomics-crypto/mig/libmig"
@@ -10,7 +10,6 @@ import (
 func main() {
 	err := libmig.Run(os.Args[1:])
 	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
+		log.Fatal(err)
 	}
 }
