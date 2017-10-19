@@ -75,7 +75,7 @@ p.s. I have tested mig on linux and on windows, but not on OS X. If it needs twe
 
 Here's how to use mig with Heroku's CI and Release Phase. In your `Gopkg.toml`:
 
-```
+```toml
 required = ["github.com/nomics-crypto/mig"]
 
 [metadata.heroku]
@@ -87,7 +87,7 @@ For `install` you just want to add mig on the end of what you already have. The 
 
 Then, in your Procfile:
 
-```
+```Procfile
 web: your command here
 release: mig up
 ```
