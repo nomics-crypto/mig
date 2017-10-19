@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	log.SetFlags(0)
 	err := libmig.Run(os.Args[1:])
 	if err != nil {
 		log.Fatal(err)
