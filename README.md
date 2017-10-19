@@ -70,3 +70,24 @@ $ psql -c "SELECT version FROM migrations" -d mig
 ```
 
 p.s. I have tested mig on linux and on windows, but not on OS X. If it needs tweaks for OS X let me know.
+
+## Mig on Heroku CI + Release
+
+Here's how to use mig with Heroku's CI and Release Phase. In your `Gopkg.toml`:
+
+```
+required = ["github.com/nomics-crypto/mig"]
+
+[metadata.heroku]
+  root-package = "your/app/package/here"
+  install = [ ".", "./vendor/github.com/nomics-crypto/mig"]
+```
+
+For `install` you just want to add mig on the end of what you already have. The default install is ".".
+
+Then, in your Procfile:
+
+```
+web: your command here
+release: mig up
+```
