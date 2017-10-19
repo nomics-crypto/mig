@@ -225,8 +225,8 @@ func db() (*sql.DB, error) {
 			envLines := strings.Split(string(envBytes), "\n")
 			for _, line := range envLines {
 				tuple := strings.Split(line, "=")
-				if len(tuple) == 2 && tuple[0] == "DATABASE_URL" {
-					dbURL = tuple[1]
+				if len(tuple) > 1 && tuple[0] == "DATABASE_URL" {
+					dbURL = strings.Join(tuple[1:], "=")
 					break
 				}
 			}
